@@ -32,7 +32,7 @@ namespace EmployeeService.Controllers
                 }
                 else
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee with Id = " + id.ToString() + "not found");
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee with Id = " + id.ToString() + " not found");
                 }
             }
 
@@ -49,8 +49,8 @@ namespace EmployeeService.Controllers
                     entities.SaveChanges();
 
                     // Sending reponse code along with URL attach with ID
-                    var message = Request.CreateResponse(HttpStatusCode.Created, employee);
-                    message.Headers.Location = new Uri(Request.RequestUri + employee.ID.ToString());
+                    var message = Request.CreateResponse(HttpStatusCode.Created, employee); //201 Item Created
+                    message.Headers.Location = new Uri(Request.RequestUri + employee.ID.ToString()); //Passing location ie.URI + ID
                     return message;
                 }
             }
