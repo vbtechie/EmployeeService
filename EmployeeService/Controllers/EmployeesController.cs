@@ -60,5 +60,17 @@ namespace EmployeeService.Controllers
             }
         }
 
+        // Implementing Delete method
+
+        public void Delete(int id)
+        {
+            using (EmployeeDBEntities entities = new EmployeeDBEntities())
+            {
+                entities.Employees.Remove(entities.Employees.FirstOrDefault( e => e.ID == id));
+                entities.SaveChanges();
+
+            }
+        }
+
     }
 }
