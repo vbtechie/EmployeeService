@@ -12,20 +12,20 @@ namespace EmployeeService
     public static class WebApiConfig
     {
         // Another approach for formatting JSON from browser
-        public class CustomJsonFormatter : JsonMediaTypeFormatter
-        {
-            public CustomJsonFormatter()
-            {
-                this.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
-            }
+        //public class CustomJsonFormatter : JsonMediaTypeFormatter
+        //{
+        //    public CustomJsonFormatter()
+        //    {
+        //        this.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
+        //    }
 
-            public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
-            {
-                base.SetDefaultContentHeaders(type, headers, mediaType);
+        //    public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
+        //    {
+        //        base.SetDefaultContentHeaders(type, headers, mediaType);
 
-                headers.ContentType = new MediaTypeHeaderValue("application/json");
-            }
-        }
+        //        headers.ContentType = new MediaTypeHeaderValue("application/json");
+        //    }
+        //}
 
         public static void Register(HttpConfiguration config)
         {
@@ -52,7 +52,7 @@ namespace EmployeeService
             // config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
 
             // 3b. Register our custom Formatter <=> When request is made from  Web Browser
-            config.Formatters.Add(new CustomJsonFormatter());
+            // config.Formatters.Add(new CustomJsonFormatter());
 
             // Indent JSON data
             // config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
