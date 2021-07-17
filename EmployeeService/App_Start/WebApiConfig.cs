@@ -21,11 +21,22 @@ namespace EmployeeService
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            // Understanding MediaTypeFormatter
+
+            // 1. How to return only JSON formatted data from API 
+            // config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            // 2. How to return only XML formatted data from API
+            // config.Formatters.Remove(config.Formatters.JsonFormatter);
+
+            // 3. When request is made from  Web Browser
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
+
             // Indent JSON data
-            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+            // config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
 
             // Camel case instead of Pascal case
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+           // config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
         }
     }
 }
