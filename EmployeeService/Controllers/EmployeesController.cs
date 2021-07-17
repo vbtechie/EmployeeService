@@ -26,12 +26,24 @@ namespace EmployeeService.Controllers
             }
         }
 
-        public void post([FromBody] Employee employee)
+        public HttpResponseMessage Post([FromBody] Employee employee)
         {
-            using (EmployeeDBEntities entities = new EmployeeDBEntities())
+            try
             {
-                entities.Employees.Add(employee);
-                entities.SaveChanges();
+                using (EmployeeDBEntities entities = new EmployeeDBEntities())
+                {
+                    entities.Employees.Add(employee);
+                    entities.SaveChanges();
+
+                    // Sending reponse code along with URL attach with ID
+                    var message = Request.CreateResponse(HttpStatusCode.Created, employee);
+                    message.Headers.Location = new Uri(Request.RequestUri + employee.ID.ToString());
+                    return message;
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
 
