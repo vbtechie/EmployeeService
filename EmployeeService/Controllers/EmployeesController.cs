@@ -74,7 +74,7 @@ namespace EmployeeService.Controllers
 
         // Change return type to handle httpresponse
         // If id is not found then give HTTPStatusCode not found - 404
-        // If id is found then give HTTPStatusCode OK - 201
+        // If id is found then give HTTPStatusCode OK - 200 OK
         // Put all code under try..catch to handle exception.
         public HttpResponseMessage Delete(int id)
         {
@@ -87,7 +87,7 @@ namespace EmployeeService.Controllers
 
                     if (entity == null)
                     {
-                        return Request.CreateResponse(HttpStatusCode.NotFound, "Employee with id = " + id.ToString() + " not found");
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee with id = " + id.ToString() + " not found to delete");
                     }
                     else
                     {
