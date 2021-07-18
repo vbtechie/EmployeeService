@@ -62,13 +62,47 @@ namespace EmployeeService.Controllers
 
         // Implementing Delete method
         // With void return type it will get us HTTPstatus code - 204 No Content
-        public void Delete(int id)
-        {
-            using (EmployeeDBEntities entities = new EmployeeDBEntities())
-            {
-                entities.Employees.Remove(entities.Employees.FirstOrDefault( e => e.ID == id));
-                entities.SaveChanges();
+        //public void Delete(int id)
+        //{
+        //    using (EmployeeDBEntities entities = new EmployeeDBEntities())
+        //    {
+        //        entities.Employees.Remove(entities.Employees.FirstOrDefault( e => e.ID == id));
+        //        entities.SaveChanges();
 
+        //    }
+        //}
+
+        // Change return type to handle httpresponse
+        // If id is not found then give HTTPStatusCode not found - 404
+        // If id is found then give HTTPStatusCode OK - 201
+        // Put all code under try..catch to handle exception.
+        public HttpResponseMessage Delete(int id)
+        {
+
+            try
+            {
+                using (EmployeeDBEntities entities = new EmployeeDBEntities())
+                {
+                    var entity = entities.Employees.Remove(entities.Employees.FirstOrDefault(e => e.ID == id));
+
+                    if (entity == null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.NotFound, "Employee with id = " + id.ToString() + " not found");
+                    }
+                    else
+                    {
+                        entities.Employees.Remove(entity);
+                        entities.SaveChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+
+
+                }
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
 
