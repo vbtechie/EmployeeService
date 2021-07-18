@@ -61,7 +61,7 @@ namespace EmployeeService.Controllers
         }
 
         // Implementing Delete method
-
+        // With void return type it will get us HTTPstatus code - 204 No Content
         public void Delete(int id)
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
