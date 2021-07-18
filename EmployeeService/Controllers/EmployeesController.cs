@@ -24,7 +24,7 @@ namespace EmployeeService.Controllers
 
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
-                var entity =  entities.Employees.FirstOrDefault(e => e.ID == id);
+                var entity = entities.Employees.FirstOrDefault(e => e.ID == id);
 
                 if (entity != null)
                 {
@@ -100,24 +100,55 @@ namespace EmployeeService.Controllers
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex); //400 Bad Request
             }
         }
 
         // Implement Put method with => for update id
-        public void Put(int id, [FromBody] Employee employee)
+        //public void Put(int id, [FromBody] Employee employee)
+        //{
+        //    using (EmployeeDBEntities entities = new EmployeeDBEntities())
+        //    {
+        //        var entity = entities.Employees.FirstOrDefault(e => e.ID == id);
+        //        entity.FirstName = employee.FirstName;
+        //        entity.LastName = employee.LastName;
+        //        entity.Gender = employee.Gender;
+        //        entity.Salary = employee.Salary;
+
+        //        entities.SaveChanges();
+        //    }
+        //}
+
+
+
+        // Change return type to handle httpresponse
+        // If id is not found then give HTTPStatusCode not found - 404
+        // If id is found then give HTTPStatusCode OK - 200 OK
+        // Put all code under try..catch to handle exception.
+
+        public HttpResponseMessage Put(int id, [FromBody] Employee employee)
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
                 var entity = entities.Employees.FirstOrDefault(e => e.ID == id);
-                entity.FirstName = employee.FirstName;
-                entity.LastName = employee.LastName;
-                entity.Gender = employee.Gender;
-                entity.Salary = employee.Salary;
 
-                entities.SaveChanges();
+                if (entity != null)
+                {
+                    entity.FirstName = employee.FirstName;
+                    entity.LastName = employee.LastName;
+                    entity.Gender = employee.Gender;
+                    entity.Salary = employee.Salary;
+
+                    entities.SaveChanges();
+
+                    return Request.CreateResponse(HttpStatusCode.OK, "Record updated at ID = " + id.ToString());
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Record not found at ID = " + id.ToString());
+                }
             }
         }
 
