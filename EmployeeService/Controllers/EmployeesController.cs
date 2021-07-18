@@ -116,6 +116,8 @@ namespace EmployeeService.Controllers
                 entity.LastName = employee.LastName;
                 entity.Gender = employee.Gender;
                 entity.Salary = employee.Salary;
+
+                entities.SaveChanges();
             }
         }
 
