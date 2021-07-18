@@ -11,6 +11,6 @@ Learn various HTTPResponseMessage for GET, PUT, POST, DELETE methods.
 
 Tools I am using
 
-Visual Studio
-SQL Server Management Studio
-Fiddler for test Put, Post and Delete request.
+=> Visual Studio
+=> SQL Server Management Studio
+=> Fiddler (for test httprequests Put, Post and Delete)
