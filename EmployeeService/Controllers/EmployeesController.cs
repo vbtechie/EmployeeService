@@ -83,7 +83,7 @@ namespace EmployeeService.Controllers
             {
                 using (EmployeeDBEntities entities = new EmployeeDBEntities())
                 {
-                    var entity = entities.Employees.Remove(entities.Employees.FirstOrDefault(e => e.ID == id));
+                    var entity = entities.Employees.FirstOrDefault(e => e.ID == id);
 
                     if (entity == null)
                     {
@@ -102,7 +102,7 @@ namespace EmployeeService.Controllers
             }
             catch(Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex); //400 Bad Request
             }
         }
 
