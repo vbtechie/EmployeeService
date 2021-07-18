@@ -10,7 +10,17 @@ namespace EmployeeService.Controllers
 {
     public class EmployeesController : ApiController
     {
-        public IEnumerable<Employee> Get()
+        //public IEnumerable<Employee> Get()
+        //{
+        //    using (EmployeeDBEntities entities = new EmployeeDBEntities())
+        //    {
+        //        return entities.Employees.ToList();
+        //    }
+        //}
+
+
+        // Get, post, put or delete will work as Suffix name of method and work same as Get
+        public IEnumerable<Employee> GetSomething()
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
