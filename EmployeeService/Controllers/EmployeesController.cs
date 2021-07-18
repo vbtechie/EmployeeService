@@ -106,5 +106,18 @@ namespace EmployeeService.Controllers
             }
         }
 
+        // Implement Put method with => for update id
+        public void Put(int id, [FromBody] Employee employee)
+        {
+            using (EmployeeDBEntities entities = new EmployeeDBEntities())
+            {
+                var entity = entities.Employees.FirstOrDefault(e => e.ID == id);
+                entity.FirstName = employee.FirstName;
+                entity.LastName = employee.LastName;
+                entity.Gender = employee.Gender;
+                entity.Salary = employee.Salary;
+            }
+        }
+
     }
 }
