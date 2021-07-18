@@ -19,8 +19,37 @@ namespace EmployeeService.Controllers
         //}
 
 
+        //public HttpResponseMessage Get(int id)
+        //{
+        //    // when id is not found return response 404
+
+        //    using (EmployeeDBEntities entities = new EmployeeDBEntities())
+        //    {
+        //        var entity = entities.Employees.FirstOrDefault(e => e.ID == id);
+
+        //        if (entity != null)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.OK, entity);
+        //        }
+        //        else
+        //        {
+        //            return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee with Id = " + id.ToString() + " not found");
+        //        }
+        //    }
+        //}
+
+
         // Get, post, put or delete will work as Suffix name of method and work same as Get
-        public IEnumerable<Employee> GetSomething()
+        //public IEnumerable<Employee> GetSomething()
+        //{
+        //    using (EmployeeDBEntities entities = new EmployeeDBEntities())
+        //    {
+        //        return entities.Employees.ToList();
+        //    }
+        //}
+
+        [HttpGet]
+        public IEnumerable<Employee> LoadAllEmployees()
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
@@ -28,7 +57,8 @@ namespace EmployeeService.Controllers
             }
         }
 
-        public HttpResponseMessage Get(int id)
+        [HttpGet]
+        public HttpResponseMessage LoadEmployeeById(int id)
         {
             // when id is not found return response 404
 
@@ -45,8 +75,6 @@ namespace EmployeeService.Controllers
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee with Id = " + id.ToString() + " not found");
                 }
             }
-
-
         }
 
         public HttpResponseMessage Post([FromBody] Employee employee)
